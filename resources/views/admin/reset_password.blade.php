@@ -25,44 +25,35 @@
                     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                         <div class="card card-primary border-box">
                             <div class="card-header card-header-auth">
-                                <h4 class="text-center">Admin Panel Login</h4>
+                                <h4 class="text-center">Reset Password</h4>
                             </div>
-                            <div class="card-body card-body-auth bg-ash">
-
-                                @if(session()->get('success'))
-                                            
-                                            <div class="text-success">{{ session()->get('success') }}</div>
-                                @endif
-
-                                <form method="POST" action="{{ route('admin_login_submit') }}">
+                            <div class="card-body card-body-auth">
+                                <form method="POST" action="{{ route('admin_reset_password_submit') }}">
                                     @csrf
+                                    <input type="hidden" name="token" value="{{ $token }}">
+                                    <input type="hidden" name="email" value="{{ $email }}">
+                                    
                                     <div class="form-group">
-                                        <input type="text" class="form-control" @error('email') is-invalid @enderror name="email" placeholder="Email Address" value="{{ old('email') }}" autofocus>
-                                        @error('email')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                        @if(session()->get('error'))
-                                            
-                                            <div class="text-danger">{{ session()->get('error') }}</div>
-                                            
-                                        @endif
-
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"  placeholder="Password">
+                                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" autofocus>
                                         @error('password')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <input type="password" class="form-control @error('confirm_password') is-invalid @enderror" name="confirm_password" placeholder="Confirm Password" autofocus>
+                                        @error('confirm_password')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                            Login
+                                            Update
                                         </button>
                                     </div>
                                     <div class="form-group">
                                         <div>
-                                            <a href="{{ route('admin_forget_password') }}">
-                                                Forget Password?
+                                            <a href="{{ route('admin_login') }}">
+                                                Back to login page
                                             </a>
                                         </div>
                                     </div>

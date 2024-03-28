@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Hash;
+//use Illuminate\Support\Facades\Hash;
 use App\Mail\Websitemail;
-//use Hash;
+use Hash;
 use Auth;
 
 class AdminLoginController extends Controller
@@ -22,6 +22,32 @@ class AdminLoginController extends Controller
         return view('admin.forget_password');
     }
 
+    public function forget_password_submit(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $admin_data = Admin::where('email', $request->email)->first();
+        if (!$admin_data) {
+            return redirect()->back()->with('error', 'Invalid Email!');
+        }
+
+        $token = hash('sha256', time());
+
+        $admin_data->token = $token;
+        $admin_data->update();
+
+        $reset_link = url('admin/reset-password/' . $token . '/' . $request->email);
+        $subject = 'Reset Password';
+        $message = 'Please click on the below link to reset your password: <br>';
+        $message .= '<a href="' . $reset_link . '">Click here</a>';
+
+        \Mail::to($request->email)->send(new Websitemail($subject, $message));
+
+        return redirect()->route('admin_login')->with('success', 'Check your email to reset password!');
+    }
+
     public function login_submit(Request $request)
     {
         $request->validate([
@@ -29,19 +55,16 @@ class AdminLoginController extends Controller
             'password' => 'required',
         ]);
 
-       $credential =[
-              'email' => $request->email,
-              'password' => $request->password,
-         ];
+        $credential = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
 
-         if(Auth::guard('admin')->attempt($credential))
-         {
+        if (Auth::guard('admin')->attempt($credential)) {
             return redirect()->route('admin_home');
-         }
-         else
-         {
-            return redirect()->route('admin_login')->with('error','Incorrect Email or Password!');   
-         }
+        } else {
+            return redirect()->route('admin_login')->with('error', 'Incorrect Email or Password!');
+        }
     }
 
 
@@ -51,4 +74,29 @@ class AdminLoginController extends Controller
         return redirect()->route('admin_login');
     }
 
+    public function reset_password($token, $email)
+    {
+        $admin_data = Admin::where('token', $token)->where('email', $email)->first();
+        if (!$admin_data) {
+            return redirect()->route('admin_login');
+        }
+
+        return view('admin.reset_password', compact('token', 'email'));
+    }
+
+    public function reset_password_submit(Request $request)
+    {
+        $request->validate([
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+        ]);
+        
+        $admin_data=Admin::where('token', $request->token)->where('email', $request->email)->first();
+
+        $admin_data->password=Hash::make($request->password);
+        $admin_data->token='';
+        $admin_data->update();
+
+        return redirect()->route('admin_login')->with('success', 'Password reset successfully!');
+    }
 }
