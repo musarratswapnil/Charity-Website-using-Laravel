@@ -17,7 +17,7 @@
                         <a href="profile.html" class="dropdown-item has-icon text-primary">
                             <i class="far fa-user"></i> Edit Profile
                         </a>
-                        <a href="login.html" class="dropdown-item has-icon text-primary">
+                        <a href="{{ route('admin_logout') }}" class="dropdown-item has-icon text-primary">
                             <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                     </div>

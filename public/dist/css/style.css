@@ -1321,11 +1321,11 @@ h6 .badge {
   background-color: #610404;
   border-color: #610404; }
   .btn-primary:focus, .btn-primary.disabled:focus {
-    background-color: #394eea !important; }
+    background-color: #7c0707 !important; }
     .btn-primary:focus:active, .btn-primary.disabled:focus:active {
-      background-color: #394eea !important; }
+      background-color: #7c0707 !important; }
   .btn-primary:active, .btn-primary:hover, .btn-primary.disabled:active, .btn-primary.disabled:hover {
-    background-color: #394eea !important; }
+    background-color: #7c0707 !important; }
 
 .btn-outline-primary, .btn-outline-primary.disabled {
   border-color: #610404;
