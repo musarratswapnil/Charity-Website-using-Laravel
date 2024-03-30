@@ -89,10 +89,67 @@ class CustomerAuthController extends Controller
         }
     }
 
-
     public function logout()
     {
         Auth::guard('customer')->logout();
         return redirect()->route('customer_login');
     }
+
+    public function forget_password()
+    {
+        return view('front.forget_password');
+    }
+
+    public function forget_password_submit(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $customer_data = Customer::where('email', $request->email)->first();
+        if (!$customer_data) {
+            return redirect()->back()->with('error', 'Invalid Email!');
+        }
+
+        $token = hash('sha256', time());
+
+        $customer_data->token = $token;
+        $customer_data->update();
+
+        $reset_link = url('reset-password/' . $token . '/' . $request->email);
+        $subject = 'Reset Password';
+        $message = 'Please click on the below link to reset your password: <br>';
+        $message .= '<a href="' . $reset_link . '">Click here</a>';
+
+        \Mail::to($request->email)->send(new Websitemail($subject, $message));
+
+        return redirect()->route('customer_login')->with('success', 'Check your email to reset password!');
+    }
+
+    public function reset_password($token, $email)
+    {
+        $customer_data = Customer::where('token', $token)->where('email', $email)->first();
+        if (!$customer_data) {
+            return redirect()->route('customer_login');
+        }
+
+        return view('front.reset_password', compact('token', 'email'));
+    }
+
+    public function reset_password_submit(Request $request)
+    {    
+        $request->validate([
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+        ]);
+        
+        $customer_data=Customer::where('token', $request->token)->where('email', $request->email)->first();
+
+        $customer_data->password=Hash::make($request->password);
+        $customer_data->token='';
+        $customer_data->update();
+
+        return redirect()->route('customer_login')->with('success', 'Password reset successfully!');
+    }
 }
+
