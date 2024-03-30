@@ -31,7 +31,7 @@
                                 
 
                                 @if(session()->get('success'))
-                                    <div class="text-success">{{ session()->get('success') }}</div>
+                                            <div class="text-success">{{ session()->get('success') }}</div>
                                 @endif
 
                                 <form method="POST" action="{{ route('admin_login_submit') }}">

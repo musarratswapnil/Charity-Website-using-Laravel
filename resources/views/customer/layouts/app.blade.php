@@ -10,9 +10,9 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 
-    @include('admin.layout.styles')
+    @include('customer.layouts.styles')
 
-    @include('admin.layout.scripts')
+    @include('customer.layouts.scripts')
 
 </head>
 
@@ -20,11 +20,11 @@
 <div id="app">
     <div class="main-wrapper">
 
-        @include('admin.layout.nav')
+        @include('customer.layouts.nav')
 
 
 
-        @include('admin.layout.sidebar')
+        @include('customer.layouts.sidebar')
 
         <div class="main-content">
             <section class="section">
@@ -39,7 +39,7 @@
     </div>
 </div>
 
-@include('admin.layout.scripts_footer')
+@include('customer.layouts.scripts_footer')
 
 
 </body>
