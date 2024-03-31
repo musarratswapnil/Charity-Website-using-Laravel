@@ -27,12 +27,21 @@
                     </div>
                     <div class="col-md-6 right-side">
                         <ul class="right">
+                            @if(Auth::guard('customer')->check())
+                            <li class="menu">
+                                <a href="{{ route('customer_home') }}"><i class="fas fa-user"></i> Dashboard</a>
+                            </li>
+                            <li class="menu">
+                                <a href="{{ route('customer_logout') }}"><i class="fas fa-sign-in-alt"></i> Logout</a>
+                            </li>
+                            @else
                             <li class="menu">
                                 <a href="{{ route('customer_login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
                             </li>
                             <li class="menu">
                                 <a href="{{ route('customer_signup') }}"><i class="fas fa-user"></i> Sign Up</a>
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </div>

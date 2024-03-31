@@ -29,7 +29,7 @@ class CustomerAuthController extends Controller
         ];
 
         if (Auth::guard('customer')->attempt($credential)) {
-            return redirect()->route('customer_home');
+            return redirect()->route('home');
         } else {
             return redirect()->route('customer_login')->with('error', 'Incorrect Email or Password!');
         }
