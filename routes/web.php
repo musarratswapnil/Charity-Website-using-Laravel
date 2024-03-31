@@ -10,6 +10,7 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Customer\CustomerHomeController;
 use App\Http\Controllers\Customer\CustomerAuthController;
 use App\Http\Controllers\Customer\CustomerProfileController;
+use App\Http\Controllers\Admin\AdminSliderController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -17,7 +18,7 @@ use App\Http\Controllers\Customer\CustomerProfileController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/admin/home', [AdminHomeController::class, 'index'])->name('admin_home')->middleware('admin:admin');
+
 Route::get('/admin/login', [AdminLoginController::class, 'index'])->name('admin_login');
 Route::post('/admin/login-submit', [AdminLoginController::class, 'login_submit'])->name('admin_login_submit');
 Route::get('/admin/logout', [AdminLoginController::class, 'logout'])->name('admin_logout');
@@ -27,9 +28,22 @@ Route::get('/admin/reset-password/{token}/{email}', [AdminLoginController::class
 Route::post('/admin/reset-password-submit', [AdminLoginController::class, 'reset_password_submit'])->name('admin_reset_password_submit');
 
 
+Route::group(['middleware' => 'admin:admin'], function () {
+    Route::get('admin/home', [AdminHomeController::class, 'index'])->name('admin_home');
+    Route::get('admin/edit-profile', [AdminProfileController::class, 'index'])->name('admin_profile');
+    Route::post('admin/edit-profile-submit', [AdminProfileController::class, 'profile_submit'])->name('admin_profile_submit');
 
-Route::get('/admin/edit-profile', [AdminProfileController::class, 'index'])->name('admin_profile')->middleware('admin:admin');
-Route::post('/admin/edit-profile-submit', [AdminProfileController::class, 'profile_submit'])->name('admin_profile_submit');
+    Route::get('admin/slider/index', [AdminSliderController::class, 'index'])->name('admin_slider_index');
+    Route::get('admin/slider/create', [AdminSliderController::class, 'create'])->name('admin_slider_create');
+    Route::post('admin/slider/create-submit', [AdminSliderController::class, 'create_submit'])->name('admin_slider_create_submit');
+    Route::get('admin/slider/edit/{id}', [AdminSliderController::class, 'edit'])->name('admin_slider_edit');
+    Route::post('admin/slider/edit-submit/{id}', [AdminSliderController::class, 'edit_submit'])->name('admin_slider_edit_submit');
+    Route::get('admin/slider/delete/{id}', [AdminSliderController::class, 'delete'])->name('admin_slider_delete');
+
+});
+
+// Route::get('/admin/edit-profile', [AdminProfileController::class, 'index'])->name('admin_profile')->middleware('admin:admin');
+// Route::post('/admin/edit-profile-submit', [AdminProfileController::class, 'profile_submit'])->name('admin_profile_submit');
 
 
 

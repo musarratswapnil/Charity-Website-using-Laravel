@@ -3,7 +3,9 @@
 @section('main_content')
 <div class="slider">
     <div class="slide-carousel owl-carousel">
-        <div class="item" style="background-image:url(uploads/slide-1.jpg);">
+
+        @foreach ($slider as $slide)
+        <div class="item" style="background-image:url('{{ asset('uploads/'.$slide->photo) }}');">
             <div class="bg"></div>
             <div class="text">
                 <div class="container">
@@ -11,12 +13,12 @@
                         <div class="col-lg-6">
                             <div class="text-wrapper">
                                 <div class="text-content">
-                                    <h2>Help the Child <br>in need</h2>
+                                    <h2>{!! $slide->heading !!}</h2>
                                     <p>
-                                        We should support kids who are having a tough time. It's about being kind and giving a hand to children facing problems like being poor, sick, or in trouble. When we help, we show them that they're not alone and that things can get better. 
+                                        {{ $slide->text }}
                                     </p>
                                     <div class="button-style-1 mt_20">
-                                        <a href="">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
+                                        <a href="{{ $slide->button_link }}">{{ $slide->button_text }} <i class="fas fa-long-arrow-alt-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -25,28 +27,9 @@
                 </div>
             </div>
         </div>
-        <div class="item" style="background-image:url(uploads/slide-2.jpg);">
-            <div class="bg"></div>
-            <div class="text">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="text-wrapper">
-                                <div class="text-content">
-                                    <h2>Fight for right <br>causes</h2>
-                                    <p>
-                                        We work hard to support and raise awareness for important issues that need attention and action. Our goal is to make the world a better place by advocating for justice, equality, and positive change. Your support and involvement can help a lot.
-                                    </p>
-                                    <div class="button-style-1">
-                                        <a href="">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        @endforeach
+
     </div>
 </div>
 

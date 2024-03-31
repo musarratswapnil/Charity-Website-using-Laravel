@@ -26,15 +26,7 @@
 
         @include('admin.layout.sidebar')
 
-        <div class="main-content">
-            <section class="section">
-                <div class="section-header">
-                    <h1 class="text-primary">@yield('heading')</h1>
-                </div>
-                
-                @yield('main_content')
-            </section>
-        </div>
+        @yield('main_content')
 
     </div>
 </div>
