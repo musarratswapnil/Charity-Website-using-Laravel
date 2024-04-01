@@ -11,6 +11,7 @@ use App\Http\Controllers\Customer\CustomerHomeController;
 use App\Http\Controllers\Customer\CustomerAuthController;
 use App\Http\Controllers\Customer\CustomerProfileController;
 use App\Http\Controllers\Admin\AdminSliderController;
+use App\Http\Controllers\Admin\AdminEventController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -40,10 +41,22 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::post('admin/slider/edit-submit/{id}', [AdminSliderController::class, 'edit_submit'])->name('admin_slider_edit_submit');
     Route::get('admin/slider/delete/{id}', [AdminSliderController::class, 'delete'])->name('admin_slider_delete');
 
+
+    Route::get('admin/event/index', [AdminEventController::class, 'index'])->name('admin_event_index');
+    Route::get('admin/event/create', [AdminEventController::class, 'create'])->name('admin_event_create');
+    Route::post('admin/event/create-submit', [AdminEventController::class, 'create_submit'])->name('admin_event_create_submit');
+    Route::get('admin/event/edit/{id}', [AdminEventController::class, 'edit'])->name('admin_event_edit');
+    Route::post('admin/event/edit-submit/{id}', [AdminEventController::class, 'edit_submit'])->name('admin_event_edit_submit');
+    Route::get('admin/event/delete/{id}', [AdminEventController::class, 'delete'])->name('admin_event_delete');
+    Route::get('admin/event/photo/{id}', [AdminEventController::class, 'photo'])->name('admin_event_photo');
+    Route::post('admin/event/photo-submit/{id}', [AdminEventController::class, 'photo_submit'])->name('admin_event_photo_submit');
+    Route::get('admin/event/photo-delete/{id}', [AdminEventController::class, 'photo_delete'])->name('admin_event_photo_delete');
+    Route::get('admin/event/video/{id}', [AdminEventController::class, 'video'])->name('admin_event_video');
+    Route::post('admin/event/video-submit/{id}', [AdminEventController::class, 'video_submit'])->name('admin_event_video_submit');
+    Route::get('admin/event/video-delete/{id}', [AdminEventController::class, 'video_delete'])->name('admin_event_video_delete');
+
 });
 
-// Route::get('/admin/edit-profile', [AdminProfileController::class, 'index'])->name('admin_profile')->middleware('admin:admin');
-// Route::post('/admin/edit-profile-submit', [AdminProfileController::class, 'profile_submit'])->name('admin_profile_submit');
 
 
 

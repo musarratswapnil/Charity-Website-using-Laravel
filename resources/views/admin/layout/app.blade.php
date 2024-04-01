@@ -14,6 +14,16 @@
 
     @include('admin.layout.scripts')
 
+    
+
+
+    <script>
+        tinymce.init({
+        selector: 'textarea.editor', 
+    });
+
+    </script>
+
 </head>
 
 <body>

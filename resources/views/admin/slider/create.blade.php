@@ -1,12 +1,10 @@
 @extends('admin.layout.app')
 
-@section('heading', 'Sliders')
-
 @section('main_content')
 <div class="main-content">
     <section class="section">
         <div class="section-header d-flex justify-content-between">
-            <h1 class="text-primary">Add Slider</h1>
+            <h1 class="text-primary">Add Image Slider</h1>
             <div>
                 <a href="{{ route('admin_slider_create') }}" class="btn btn-primary">Add New</a>
             </div>
