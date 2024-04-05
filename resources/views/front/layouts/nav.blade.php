@@ -15,14 +15,14 @@
                 </a>
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a href="index.html" class="nav-link">Home</a>
+                        <li class="nav-item {{ Request::is('/')? 'active': '' }}">
+                            <a href="{{ route('home') }}" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
                             <a href="about.html" class="nav-link">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="events.html" class="nav-link">Events</a>
+                        <li class="nav-item {{ Request::is('events')? 'active': '' }}">
+                            <a href="{{ route('events') }}" class="nav-link">Events</a>
                         </li>
                         <li class="nav-item">
                             <a href="causes.html" class="nav-link">Causes</a>

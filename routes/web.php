@@ -12,12 +12,16 @@ use App\Http\Controllers\Customer\CustomerAuthController;
 use App\Http\Controllers\Customer\CustomerProfileController;
 use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminEventController;
+use App\Http\Controllers\Front\EventController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event');
+Route::post('/event/send-message', [EventController::class, 'send_message'])->name('event_send_message');
 
 
 Route::get('/admin/login', [AdminLoginController::class, 'index'])->name('admin_login');
