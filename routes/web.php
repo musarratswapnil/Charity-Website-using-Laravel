@@ -13,6 +13,7 @@ use App\Http\Controllers\Customer\CustomerProfileController;
 use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminEventController;
 use App\Http\Controllers\Front\EventController;
+use App\Http\Controllers\Admin\AdminCampaignController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -58,6 +59,16 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::get('admin/event/video/{id}', [AdminEventController::class, 'video'])->name('admin_event_video');
     Route::post('admin/event/video-submit/{id}', [AdminEventController::class, 'video_submit'])->name('admin_event_video_submit');
     Route::get('admin/event/video-delete/{id}', [AdminEventController::class, 'video_delete'])->name('admin_event_video_delete');
+
+
+
+    Route::get('admin/campaign/index', [AdminCampaignController::class, 'index'])->name('admin_campaign_index');
+    Route::get('admin/campaign/create', [AdminCampaignController::class, 'create'])->name('admin_campaign_create');
+    Route::post('admin/campaign/create-submit', [AdminCampaignController::class, 'create_submit'])->name('admin_campaign_create_submit');
+    Route::get('admin/campaign/edit/{id}', [AdminCampaignController::class, 'edit'])->name('admin_campaign_edit');
+    Route::post('admin/campaign/edit-submit/{id}', [AdminCampaignController::class, 'edit_submit'])->name('admin_campaign_edit_submit');
+    Route::get('admin/campaign/delete/{id}', [AdminCampaignController::class, 'delete'])->name('admin_campaign_delete');
+    
 
 });
 

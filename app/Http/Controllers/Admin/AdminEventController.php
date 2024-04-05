@@ -57,7 +57,7 @@ class AdminEventController extends Controller
         $obj->featured_photo = $final_name;
         $obj->save();
 
-        return redirect()->back()->with('success', 'Event created successfully');
+        return redirect()->route('admin_event_index')->with('success', 'Event created successfully');
     }
 
     public function edit($id)

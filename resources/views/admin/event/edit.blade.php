@@ -4,10 +4,8 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header d-flex justify-content-between">
-            <h1 class="text-primary">Edit Image Slider</h1>
-            <div>
-                <a href="{{ route('admin_event_edit_submit', $event->id) }}" class="btn btn-primary">Add New</a>
-            </div>
+            <h1 class="text-primary">Edit Event</h1>
+            
         </div>
         <div class="section-body">
             <div class="row">

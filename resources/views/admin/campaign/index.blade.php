@@ -4,9 +4,9 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header d-flex justify-content-between">
-            <h1 class="text-primary">Event</h1>
+            <h1 class="text-primary">Campaigns</h1>
             <div>
-                <a href="{{ route('admin_event_create') }}" class="btn btn-primary">Add New</a>
+                <a href="{{ route('admin_campaign_create') }}" class="btn btn-primary">Add New</a>
             </div>
         </div>
         <div class="section-body">
@@ -19,34 +19,30 @@
                                     <thead>
                                         <tr>
                                             <th>SL</th>
-                                            <th>Featured Photo</th>
+                                            <th>Featured photo</th>
                                             <th>Name</th>
-                                            <th>Date & Time</th>
-                                            <th>Ticket Price</th>
-                                            <th>Total Seat</th>
-                                            <th>Booked Seat</th>
+                                            <th>Goal</th>
+                                            <th>Raised</th>
                                             <th>Options</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($events as $item)
+                                        @foreach ($campaigns as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td><img src="{{ asset('uploads/'. $item->featured_photo) }}" alt="" class="w_100"></td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->date }} <br> {{ $item->time }}</td> <!-- Corrected Placement -->
-                                            <td>{{ $item->price }}</td>
+                                            <td>{{ $item->goal }}</td>
                                             
-                                            <td>{{ $item->total_seat }}</td>
-                                            <td>{{ $item->booked_seat }}</td>
+                                            <td>{{ $item->raised }}</td>
                                             <td>
-                                                <a href="{{ route('admin_event_photo', $item->id) }}" class="btn btn-primary btn-sm mb_5">Photo Gallery</a><br>
-                                                <a href="{{ route('admin_event_video', $item->id) }}" class="btn btn-success btn-sm">Video Gallery</a>
+                                                {{-- <a href="{{ route('admin_event_photo', $item->id) }}" class="btn btn-primary btn-sm mb_5">Photo Gallery</a><br>
+                                                <a href="{{ route('admin_event_video', $item->id) }}" class="btn btn-success btn-sm">Video Gallery</a> --}}
                                             </td>
                                             <td class="pt_10 pb_10">
-                                                <a href="{{ Route('admin_event_edit', $item->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                <a href="{{ Route('admin_event_delete', $item->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');"><i class="fas fa-trash"></i></a>
+                                                <a href="{{ Route('admin_campaign_edit', $item->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                                <a href="{{ Route('admin_campaign_delete', $item->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');"><i class="fas fa-trash"></i></a>
                                             </td>
                                             
                                         </tr>
