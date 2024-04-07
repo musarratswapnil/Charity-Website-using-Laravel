@@ -24,8 +24,8 @@
                         <li class="nav-item {{ Request::is('events')? 'active': '' }}">
                             <a href="{{ route('events') }}" class="nav-link">Events</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="causes.html" class="nav-link">Causes</a>
+                        <li class="nav-item {{ Request::is('campaigns')? 'active': '' }}">
+                            <a href="{{ route('campaigns') }}" class="nav-link">Campaigns</a>
                         </li>
                         <li class="nav-item">
                             <a href="volunteers.html" class="nav-link">Volunteers</a>

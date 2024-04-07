@@ -39,7 +39,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label>Goal*</label>
-                                            <input type="text" class="form-control" name="price" value="{{ old('goal') }}">
+                                            <input type="text" class="form-control" name="goal" value="{{ old('goal') }}">
                                         </div>
                                     </div>
                                     
@@ -50,14 +50,14 @@
                                     <div class="col-md-12">
                                         <div class="form-group mb-3">
                                             <label>Short description*</label>
-                                            <textarea class="form-control h_100" cols="30" rows="10" name="short_description" value="{{ old('short_description') }}"></textarea>
+                                            <textarea class="form-control h_100" cols="30" rows="10" name="short_description" >{{ old('short_description') }}</textarea>
                                         </div>
                                     </div>
                                 </div>        
 
                                 <div class="form-group mb-3">
                                     <label>Description*</label>
-                                    <textarea class="form-control editor h_100" cols="30" rows="10" name="description" value="{{ old('description') }}"></textarea>
+                                    <textarea class="form-control editor h_100" cols="30" rows="10" name="description" >{{ old('description') }}</textarea>
                                 </div>                                   
 
                                                         

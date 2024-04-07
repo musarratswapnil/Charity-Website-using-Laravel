@@ -14,15 +14,21 @@ use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminEventController;
 use App\Http\Controllers\Front\EventController;
 use App\Http\Controllers\Admin\AdminCampaignController;
+use App\Http\Controllers\Front\CampaignController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event');
 Route::post('/event/send-message', [EventController::class, 'send_message'])->name('event_send_message');
+
+Route::get('/campaigns', [CampaignController::class, 'index'])->name('campaigns');
+Route::get('/campaign/{slug}', [CampaignController::class, 'detail'])->name('campaign');
+Route::post('/campaign/send-message', [CampaignController::class, 'send_message'])->name('campaign_send_message');
 
 
 Route::get('/admin/login', [AdminLoginController::class, 'index'])->name('admin_login');
@@ -68,6 +74,13 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::get('admin/campaign/edit/{id}', [AdminCampaignController::class, 'edit'])->name('admin_campaign_edit');
     Route::post('admin/campaign/edit-submit/{id}', [AdminCampaignController::class, 'edit_submit'])->name('admin_campaign_edit_submit');
     Route::get('admin/campaign/delete/{id}', [AdminCampaignController::class, 'delete'])->name('admin_campaign_delete');
+    Route::get('admin/campaign/photo/{id}', [AdminCampaignController::class, 'photo'])->name('admin_campaign_photo');
+    Route::post('admin/campaign/photo-submit/{id}', [AdminCampaignController::class, 'photo_submit'])->name('admin_campaign_photo_submit');
+    Route::get('admin/campaign/photo-delete/{id}', [AdminCampaignController::class, 'photo_delete'])->name('admin_campaign_photo_delete');
+    Route::get('admin/campaign/video/{id}', [AdminCampaignController::class, 'video'])->name('admin_campaign_video');
+    Route::post('admin/campaign/video-submit/{id}', [AdminCampaignController::class, 'video_submit'])->name('admin_campaign_video_submit');
+    Route::get('admin/campaign/video-delete/{id}', [AdminCampaignController::class, 'video_delete'])->name('admin_campaign_video_delete');
+    
     
 
 });

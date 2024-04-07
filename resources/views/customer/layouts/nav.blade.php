@@ -17,7 +17,7 @@
                     @else
                     <img alt="image" src="{{ asset('uploads/'.Auth::guard('customer')->user()->photo) }}" class="rounded-circle mr-1">
                     @endif
-                    <div class="d-sm-none d-lg-inline-block text-primary">{{Auth::guard('customer')->user()->name}}</div></a>
+                    <div class="d-sm-none d-lg-inline-block">{{Auth::guard('customer')->user()->name}}</div></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="{{ route('customer_profile') }}" class="dropdown-item has-icon text-primary">
                             <i class="far fa-user"></i> Edit Profile

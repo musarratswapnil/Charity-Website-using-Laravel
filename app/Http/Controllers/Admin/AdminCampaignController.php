@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Campaign;
+use App\Models\CampaignPhoto;
+use App\Models\CampaignVideo;
+use App\Models\User;
 
 class AdminCampaignController extends Controller
 {
@@ -32,7 +35,7 @@ class AdminCampaignController extends Controller
 
         $obj = new Campaign();
         $obj->name = $request->name;
-        $obj->slug = $request->slug;
+        $obj->slug = strtolower($request->slug);;
         $obj->goal = $request->goal;
         $obj->raised=0;
         $obj->short_description = $request->short_description;
@@ -57,7 +60,7 @@ class AdminCampaignController extends Controller
             
             'name' => ['required', 'unique:campaigns,name,' . $id],
             'slug' => ['required', 'alpha_dash', 'unique:campaigns,slug,' . $id],
-            'price' => ['required', 'numeric', 'min:1'],
+            'goal' => ['required', 'numeric', 'min:1'],
             'short_description' => 'required',
             'description' => 'required',
 
@@ -78,7 +81,7 @@ class AdminCampaignController extends Controller
         }
 
         $obj->name = $request->name;
-        $obj->slug = $request->slug;
+        $obj->slug = strtolower($request->slug);
         $obj->goal = $request->goal;
         $obj->short_description = $request->short_description;
         $obj->description = $request->description;
@@ -93,5 +96,69 @@ class AdminCampaignController extends Controller
         unlink(public_path('uploads/' . $campaign->featured_photo));
         $campaign->delete();
         return redirect()->back()->with('success', 'campaign deleted successfully');
+    }
+
+    public function photo($id)
+    {
+        $campaign_single = Campaign::findOrFail($id);
+        $campaign_photos = CampaignPhoto::where('campaign_id', $id)->get();
+        return view('admin.campaign.photo', compact('campaign_single', 'campaign_photos'));
+    }
+
+
+    public function photo_submit(Request $request, $id)
+    {
+        $request->validate([
+            'campaign_id' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
+
+        $obj = new CampaignPhoto();
+        $obj->campaign_id = $id;
+        $final_name = 'campaign_photo' . time() . '.' . $request->photo->extension();
+        $request->photo->move(public_path('uploads'), $final_name);
+        $obj->photo = $final_name;
+        $obj->save();
+
+        return redirect()->back()->with('success', 'Campaign photo added successfully');
+    }
+
+    public function photo_delete(Request $request, $id)
+    {
+    
+
+        $campaign_photo = CampaignPhoto::findOrFail($id);
+        unlink(public_path('uploads/' . $campaign_photo->photo));
+        $campaign_photo->delete();
+        return redirect()->back()->with('success', 'Campaign photo deleted successfully');
+    }
+
+    public function video($id)
+    {
+        $campaign_single = Campaign::findOrFail($id);
+        $campaign_videos = CampaignVideo::where('campaign_id', $id)->get();
+        return view('admin.campaign.video', compact('campaign_single', 'campaign_videos'));
+    }
+
+    public function video_submit(Request $request, $id)
+    {
+        $request->validate([
+            'campaign_id' => 'required',
+            'youtube_video_link' => 'required',
+        ]);
+
+        $obj = new CampaignVideo();
+        $obj->campaign_id = $id;
+        $obj->youtube_video_link = $request->youtube_video_link;
+        $obj->save();
+
+        return redirect()->back()->with('success', 'Campaign video added successfully');
+    }
+
+    public function video_delete($id)
+    {
+        $campaign_video = CampaignVideo::findOrFail($id);
+        $campaign_video->delete();
+        return redirect()->back()->with('success', 'Campaign video deleted successfully');
     }
 }

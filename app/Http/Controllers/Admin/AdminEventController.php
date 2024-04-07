@@ -43,7 +43,7 @@ class AdminEventController extends Controller
 
         $obj = new Event();
         $obj->name = $request->name;
-        $obj->slug = $request->slug;
+        $obj->slug = strtolower($request->slug);;
         $obj->location = $request->location;
         $obj->date = $request->date;
         $obj->time = $request->time;
@@ -103,7 +103,7 @@ class AdminEventController extends Controller
         }
 
         $obj->name = $request->name;
-        $obj->slug = $request->slug;
+        $obj->slug = strtolower($request->slug);;
         $obj->location = $request->location;
         $obj->date = $request->date;
         $obj->time = $request->time;
@@ -126,11 +126,11 @@ class AdminEventController extends Controller
     }
 
     public function photo($id)
-{
-    $event_single = Event::findOrFail($id);
-    $event_photos = EventPhoto::where('event_id', $id)->get();
-    return view('admin.event.photo', compact('event_single', 'event_photos'));
-}
+    {
+        $event_single = Event::findOrFail($id);
+        $event_photos = EventPhoto::where('event_id', $id)->get();
+        return view('admin.event.photo', compact('event_single', 'event_photos'));
+    }
 
 
     public function photo_submit(Request $request, $id)

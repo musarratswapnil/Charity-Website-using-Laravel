@@ -44,7 +44,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
                                             <label>Goal</label>
-                                            <input type="text" class="form-control" name="total_seat" value="{{ $campaign->goal }}">
+                                            <input type="text" class="form-control" name="goal" value="{{ $campaign->goal }}">
+
                                         </div>
                                     </div>
                                     
