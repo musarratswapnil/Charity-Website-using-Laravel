@@ -176,20 +176,20 @@
                     @if($event->price != 0)
                     <h2 class="mt_30">Buy Ticket</h2>
                     <div class="pay-sec">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('event_ticket_payment') }}">
                         @csrf
-                        <select name="" class="form-select mb_15">
+                        <input type="hidden" name="unit_price" value="{{ $event->price }}">
+                        <input type="hidden" name="event_id" value="{{ $event->id }}">
+                        <select name="number_of_tickets" class="form-select mb_15">
                             <option value="">How many tickets?</option>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
+                            @for ($i = 1; $i <= 5; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
                         </select>
-                        <select name="" class="form-select mb_15">
+                        <select name="payment_method" class="form-select mb_15">
                             <option value="">Select Payment Method</option>
-                            <option value="">PayPal</option>
-                            <option value="">Stripe</option>
+                            <option value="PayPal">PayPal</option>
+                            <option value="stripe">Stripe</option>
                         </select>
                         <button type="submit" class="btn btn-primary w-100-p pay-now">Make Payment</button>
                     </form>
@@ -199,13 +199,11 @@
                     <div class="pay-sec">
                         <form method="POST" action="">
                             @csrf
-                            <select name="" class="form-select mb_15">
+                            <select name="number_of_tickets" class="form-select mb_15">
                                 <option value="">How many tickets?</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
-                                <option value="">5</option>
+                                @for ($i = 1; $i <= 5; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
                             </select>
                         <button type="submit" class="btn btn-primary w-100-p pay-now">Book Now</button>
                         </form>

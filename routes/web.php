@@ -26,6 +26,11 @@ Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event');
 Route::post('/event/send-message', [EventController::class, 'send_message'])->name('event_send_message');
 
+
+Route::post('/event/ticket/payment', [EventController::class, 'payment'])->name('event_ticket_payment');
+Route::get('/event/ticket/paypal-success', [EventController::class, 'payal_success'])->name('event_ticket_paypal_success');
+Route::get('/event/ticket/paypal-cancel', [EventController::class, 'paypal_cancel'])->name('event_ticket_cancel');
+
 Route::get('/campaigns', [CampaignController::class, 'index'])->name('campaigns');
 Route::get('/campaign/{slug}', [CampaignController::class, 'detail'])->name('campaign');
 Route::post('/campaign/send-message', [CampaignController::class, 'send_message'])->name('campaign_send_message');
@@ -80,7 +85,7 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::get('admin/campaign/video/{id}', [AdminCampaignController::class, 'video'])->name('admin_campaign_video');
     Route::post('admin/campaign/video-submit/{id}', [AdminCampaignController::class, 'video_submit'])->name('admin_campaign_video_submit');
     Route::get('admin/campaign/video-delete/{id}', [AdminCampaignController::class, 'video_delete'])->name('admin_campaign_video_delete');
-    
+
     
 
 });
