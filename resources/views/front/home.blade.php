@@ -34,6 +34,7 @@
 </div>
 
 
+@if($mission->status== 'Show')
 <div class="special pt_70 pb_70">
     <div class="container">
         <div class="row">
@@ -43,23 +44,19 @@
                         <div class="col-md-6">
                             <div class="left-side">
                                 <div class="inner">
-                                    <h2>Our Mission</h2>
-                                    <h3>What We Do</h3>
-                                    <p>
-                                        At our charity, we are committed to making a positive impact in the lives of those in need. We provide vital support in areas such as education, healthcare, disaster relief, and addressing hunger and homelessness. We collaborate with local partners and volunteers to directly help individuals and families.
-                                    </p>
-                                    <p>
-                                        We also focus on raising awareness about critical social and environmental issues. Our efforts include campaigns, events, and partnerships with like-minded organizations to promote awareness and advocate for change. Join us in making the world a better place through fundraising, volunteering, or simply spreading the word. Together, we can be a force for good and contribute to a more compassionate and equitable society.
-                                    </p>
+                                    <h2>{{ $mission->sub_heading }}</h2>
+                                    <h3>{{ $mission->heading }}</h3>
+                                    {!! 
+                                    $mission->text !!}
                                     <div class="button-style-1 mt_20">
-                                        <a href="">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
+                                        <a href="{{ $mission->button_link }}">{{ $mission->button_text }}<i class="fas fa-long-arrow-alt-right"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="right-side" style="background-image: url(uploads/about-1.jpg);">
-                                <a class="video-button" href="https://www.youtube.com/watch?v=TklWRCSM4SA"><span></span></a>
+                            <div class="right-side" style="background-image: url('{{ asset('uploads/'.$mission->photo) }}');">
+                                <a class="video-button" href="https://www.youtube.com/watch?v={{ $mission->video_id }}"><span></span></a>
                             </div>
                         </div>
                     </div>
@@ -68,6 +65,7 @@
         </div>
     </div>
 </div>
+@endif
 
 
 <div class="cause pt_70">

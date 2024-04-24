@@ -11,21 +11,23 @@
 
             <li class="{{ Request::is ('admin/home') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_home') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
 
-            <li class="{{ Request::is ('admin/slider/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_slider_index') }}"><i class="fas fa-hand-point-right"></i> <span>Slider</span></a></li>
+            {{-- <li class="{{ Request::is ('admin/slider/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_slider_index') }}"><i class="fas fa-hand-point-right"></i> <span>Slider</span></a></li> --}}
+
+            <li class="{{ Request::is ('admin/home/*') ? 'active' : ''}}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right text-primary"></i><span class="text-primary">Home</span></a>
+                <ul class="dropdown-menu text-primary">
+
+                    <li class="{{ Request::is ('admin/slider/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_slider_index') }}"><i class="fas fa-hand-point-right"></i> <span>Slider</span></a></li>
+
+                    <li class="{{ Request::is ('admin/mission/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_mission_edit') }}"><i class="fas fa-hand-point-right"></i> <span>Mission</span></a></li>
+                </ul>
+            </li>
 
             <li class="{{ Request::is ('admin/event/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_event_index') }}"><i class="fas fa-hand-point-right"></i> <span>Event</span></a></li>
 
             <li class="{{ Request::is ('admin/campaign/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_campaign_index') }}"><i class="fas fa-hand-point-right"></i> <span>Campaign</span></a></li>
 
-            {{-- <li class="nav-item dropdown active">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right text-primary"></i><span class="text-primary">Dropdown Items</span></a>
-                <ul class="dropdown-menu text-primary">
-                    <li class="active"><a class="nav-link text-primary" href=""><i class="fas fa-angle-right"></i> Item 1</a></li>
-                    <li class=""><a class="nav-link text-primary" href=""><i class="fas fa-angle-right"></i> Item 2</a></li>
-                </ul>
-            </li>
-
-            <li class=""><a class="nav-link text-primary" href="setting.html"><i class="fas fa-hand-point-right"></i> <span>Setting</span></a></li>
+            {{-- <li class=""><a class="nav-link text-primary" href="setting.html"><i class="fas fa-hand-point-right"></i> <span>Setting</span></a></li>
 
             <li class=""><a class="nav-link text-primary" href="form.html"><i class="fas fa-hand-point-right"></i> <span>Form</span></a></li>
 

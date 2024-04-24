@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminEventController;
 use App\Http\Controllers\Front\EventController;
 use App\Http\Controllers\Admin\AdminCampaignController;
 use App\Http\Controllers\Front\CampaignController;
+use App\Http\Controllers\Admin\AdminMissionController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -56,6 +57,10 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::get('admin/slider/edit/{id}', [AdminSliderController::class, 'edit'])->name('admin_slider_edit');
     Route::post('admin/slider/edit-submit/{id}', [AdminSliderController::class, 'edit_submit'])->name('admin_slider_edit_submit');
     Route::get('admin/slider/delete/{id}', [AdminSliderController::class, 'delete'])->name('admin_slider_delete');
+
+
+    Route::get('admin/mission/edit', [AdminMissionController::class, 'edit'])->name('admin_mission_edit');
+    Route::post('admin/mission/edit-submit', [AdminMissionController::class, 'edit_submit'])->name('admin_mission_edit_submit');
 
 
     Route::get('admin/event/index', [AdminEventController::class, 'index'])->name('admin_event_index');
