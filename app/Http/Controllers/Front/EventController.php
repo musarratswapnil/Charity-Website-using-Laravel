@@ -43,6 +43,10 @@ class EventController extends Controller
         $admin_email = $admin_data->email;
 
         $event_data = Event::where('id', $request->event_id)->first();
+        $remaining_seat = $event_data->total_seat - $event_data->booked_seat;
+        if($event_data->booked_seat + $request->number_of_tickets > $event_data->total_seat){
+            return redirect()->back()->with('error', 'Sorry! Only ' . $remaining_seat . ' seats are available.');
+        }
 
 
         $subject = 'Message from visitor for Event: ' . $event_data->name;
@@ -71,6 +75,8 @@ class EventController extends Controller
             'number_of_tickets' => 'required',
             'payment_method' => 'required',
         ]);
+
+        $event_data = Event::where('id', $request->event_id)->first();
 
         $total_price = $request->number_of_tickets * $request->unit_price;
 
