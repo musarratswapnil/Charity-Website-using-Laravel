@@ -17,12 +17,14 @@ use App\Http\Controllers\Admin\AdminCampaignController;
 use App\Http\Controllers\Front\CampaignController;
 use App\Http\Controllers\Admin\AdminMissionController;
 use App\Http\Controllers\Admin\AdminFeatureController;
+use App\Http\Controllers\Front\AboutController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event');

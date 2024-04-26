@@ -24,7 +24,7 @@
                                             <th>Heading</th>
                                             {{-- <th>Description</th> --}}
                                             <th>Action</th>
-                                        </tr>
+                         `               </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($features as $feature)
