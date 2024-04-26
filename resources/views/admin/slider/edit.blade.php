@@ -6,7 +6,7 @@
         <div class="section-header d-flex justify-content-between">
             <h1 class="text-primary">Edit Image Slider</h1>
             <div>
-                <a href="{{ route('admin_slider_edit_submit', $slider->id) }}" class="btn btn-primary">Add New</a>
+                <a href="{{ route('admin_slider_index') }}" class="btn btn-primary">Add New</a>
             </div>
         </div>
         <div class="section-body">

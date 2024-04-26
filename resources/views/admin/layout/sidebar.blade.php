@@ -20,6 +20,8 @@
                     <li class="{{ Request::is ('admin/slider/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_slider_index') }}"><i class="fas fa-hand-point-right"></i> <span>Slider</span></a></li>
 
                     <li class="{{ Request::is ('admin/mission/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_mission_edit') }}"><i class="fas fa-hand-point-right"></i> <span>Mission</span></a></li>
+
+                    <li class="{{ Request::is ('admin/feature/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_feature_index') }}"><i class="fas fa-hand-point-right"></i> <span>Features</span></a></li>
                 </ul>
             </li>
 

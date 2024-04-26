@@ -177,51 +177,29 @@
 
 
 
-<div class="why-choose pt_70" style="background-image: url(uploads/why-choose-bg.jpg)">
+@if($feature_section_items->status== 'Show')
+<div class="why-choose pt_70" style="background-image: url({{ asset('uploads/'. $feature_section_items->photo) }})">
     <div class="container">
         <div class="row">
+            @foreach ($features as $feature)
             <div class="col-md-4">
                 <div class="inner pb_70">
                     <div class="icon">
-                        <i class="fas fa-briefcase"></i>
+                        <i class="{{ $feature->icon }}"></i>
                     </div>
                     <div class="text">
-                        <h2>Become a Volunteer</h2>
+                        <h2>{{ $feature->heading }}</h2>
                         <p>
-                            In order to become a volunteer, you need to fill out the form and send us. We will review your form and contact you.
+                            {!! $feature->text !!}
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="inner pb_70">
-                    <div class="icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="text">
-                        <h2>Foundation & Events</h2>
-                        <p>
-                            We organize many events for fund raising. You can also organize events and help us to raise fund for the poor people.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="inner pb_70">
-                    <div class="icon">
-                        <i class="fas fa-share-alt"></i>
-                    </div>
-                    <div class="text">
-                        <h2>Make a Donation</h2>
-                        <p>
-                            You can also donate us. We will use your donation to help the poor people. You can donate us by PayPal or Stripe.
-                        </p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
+@endif
 
 
 
@@ -361,7 +339,7 @@
 
 
 
-<div class="blog pt_70">
+{{-- <div class="blog pt_70">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -436,5 +414,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

@@ -16,6 +16,7 @@ use App\Http\Controllers\Front\EventController;
 use App\Http\Controllers\Admin\AdminCampaignController;
 use App\Http\Controllers\Front\CampaignController;
 use App\Http\Controllers\Admin\AdminMissionController;
+use App\Http\Controllers\Admin\AdminFeatureController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -57,6 +58,14 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::get('admin/slider/edit/{id}', [AdminSliderController::class, 'edit'])->name('admin_slider_edit');
     Route::post('admin/slider/edit-submit/{id}', [AdminSliderController::class, 'edit_submit'])->name('admin_slider_edit_submit');
     Route::get('admin/slider/delete/{id}', [AdminSliderController::class, 'delete'])->name('admin_slider_delete');
+
+    Route::get('admin/feature/index', [AdminFeatureController::class, 'index'])->name('admin_feature_index');
+    Route::get('admin/feature/create', [AdminFeatureController::class, 'create'])->name('admin_feature_create');
+    Route::post('admin/feature/create-submit', [AdminFeatureController::class, 'create_submit'])->name('admin_feature_create_submit');
+    Route::get('admin/feature/edit/{id}', [AdminFeatureController::class, 'edit'])->name('admin_feature_edit');
+    Route::post('admin/feature/edit-submit/{id}', [AdminFeatureController::class, 'edit_submit'])->name('admin_feature_edit_submit');
+    Route::get('admin/feature/delete/{id}', [AdminFeatureController::class, 'delete'])->name('admin_feature_delete');
+    Route::post('admin/feature/section-update', [AdminFeatureController::class, 'section_update'])->name('admin_feature_section_update');
 
 
     Route::get('admin/mission/edit', [AdminMissionController::class, 'edit'])->name('admin_mission_edit');
