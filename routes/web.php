@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\FaqController;
 
 use App\Http\Controllers\Customer\CustomerHomeController;
 use App\Http\Controllers\Customer\CustomerAuthController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Front\CampaignController;
 use App\Http\Controllers\Admin\AdminMissionController;
 use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Front\AboutController;
+use App\Http\Controllers\Admin\AdminFaqController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -25,6 +27,9 @@ use App\Http\Controllers\Front\AboutController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
+
+
 
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/event/{slug}', [EventController::class, 'detail'])->name('event');
@@ -53,6 +58,14 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::get('admin/home', [AdminHomeController::class, 'index'])->name('admin_home');
     Route::get('admin/edit-profile', [AdminProfileController::class, 'index'])->name('admin_profile');
     Route::post('admin/edit-profile-submit', [AdminProfileController::class, 'profile_submit'])->name('admin_profile_submit');
+
+    Route::get('admin/faq/index', [AdminFaqController::class, 'index'])->name('admin_faq_index');
+    Route::get('admin/faq/create', [AdminFaqController::class, 'create'])->name('admin_faq_create');
+    Route::post('admin/faq/create-submit', [AdminFaqController::class, 'create_submit'])->name('admin_faq_create_submit');
+    Route::get('admin/faq/edit/{id}', [AdminFaqController::class, 'edit'])->name('admin_faq_edit');
+    Route::post('admin/faq/edit-submit/{id}', [AdminFaqController::class, 'edit_submit'])->name('admin_faq_edit_submit');
+    Route::get('admin/faq/delete/{id}', [AdminFaqController::class, 'delete'])->name('admin_faq_delete');
+
 
     Route::get('admin/slider/index', [AdminSliderController::class, 'index'])->name('admin_slider_index');
     Route::get('admin/slider/create', [AdminSliderController::class, 'create'])->name('admin_slider_create');

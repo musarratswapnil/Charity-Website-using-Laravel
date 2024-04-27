@@ -46,8 +46,8 @@
                             </ul>
                         </li> --}}
 
-                        <li class="nav-item">
-                            <a href="faq.html" class="nav-link">FAQ</a>
+                        <li class="nav-item {{ Request::is('faqs')? 'active': '' }}">
+                            <a href="{{ route('faqs') }}" class="nav-link">FAQ</a>
                         </li>
 
                         {{-- <li class="nav-item">
