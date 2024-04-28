@@ -25,6 +25,8 @@
                 </ul>
             </li>
 
+            <li class="{{ Request::is ('admin/settings/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_settings_index') }}"><i class="fas fa-hand-point-right"></i> <span>Settings</span></a></li>
+
             <li class="{{ Request::is ('admin/faq/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_faq_index') }}"><i class="fas fa-hand-point-right"></i> <span>FAQs</span></a></li>
 
             <li class="{{ Request::is ('admin/event/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_event_index') }}"><i class="fas fa-hand-point-right"></i> <span>Event</span></a></li>

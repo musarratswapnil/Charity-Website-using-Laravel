@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CharityBig</title>
+        <title>{{ env('APP_NAME') }}</title>
 
-        <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('uploads/$global_setting_data->favicon') }}">
 
         <!-- All CSS -->
         @include('front.layouts.styles')
@@ -21,8 +21,12 @@
                 <div class="row">
                     <div class="col-md-6 left-side">
                         <ul>
-                            <li class="phone-text"><i class="fas fa-phone"></i> 111-222-3333</li>
-                            <li class="email-text"><i class="fas fa-envelope"></i> contact@example.com</li>
+                            @if($global_setting_data->top_phone!='')
+                            <li class="phone-text"><i class="fas fa-phone"></i> {{ $global_setting_data->top_phone }}</li>
+                            @endif
+                            @if($global_setting_data->top_email!='')
+                            <li class="email-text"><i class="fas fa-envelope"></i>{{ $global_setting_data->top_email }}</li>
+                            @endif
                         </ul>
                     </div>
                     <div class="col-md-6 right-side">
@@ -53,25 +57,27 @@
 
         @yield('main_content')
 
+        @if($global_setting_data->cta_status=="Show")
         <div class="cta">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="left mt_50 mb_50 xs_mb_30">
-                            <h2>Become Donate Partner</h2>
-                            <p>Help the individuals giving financing support and providing food</p>
+                            <h2>{{ $global_setting_data->cta_heading }}</h2>
+                            <p>{!! nl2br($global_setting_data->cta_text) !!}</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="right">
                             <div class="inner">
-                                <a href="contact.html">Contact Us <i class="fas fa-long-arrow-alt-right"></i></a>
+                                <a href="{{ $global_setting_data->cta_button_url }}">{{ $global_setting_data->cta_button_text }}<i class="fas fa-long-arrow-alt-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        @endif
         
         <div class="footer pt_70">
             <div class="container">
@@ -80,11 +86,11 @@
                         <div class="item pb_50">
                             <h2 class="heading">Important Pages</h2>
                             <ul class="useful-links">
-                                <li><a href="index.html"><i class="fas fa-angle-right"></i> Home</a></li>
-                                <li><a href="causes.html"><i class="fas fa-angle-right"></i> Causes</a></li>
-                                <li><a href="events.html"><i class="fas fa-angle-right"></i> Events</a></li>
-                                <li><a href="volunteers.html"><i class="fas fa-angle-right"></i> Volunteers</a></li>
-                                <li><a href="blog.html"><i class="fas fa-angle-right"></i> Blog</a></li>
+                                <li><a href="{{ route('home') }}"><i class="fas fa-angle-right"></i> Home</a></li>
+                                <li><a href="{{ route('campaigns') }}"><i class="fas fa-angle-right"></i> Campaign</a></li>
+                                <li><a href="{{ route('events') }}"><i class="fas fa-angle-right"></i> Events</a></li>
+                                {{-- <li><a href="{{ route('events') }}"><i class="fas fa-angle-right"></i> Volunteers</a></li>
+                                <li><a href="blog.html"><i class="fas fa-angle-right"></i> Blog</a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -92,7 +98,7 @@
                         <div class="item pb_50">
                             <h2 class="heading">Useful Links</h2>
                             <ul class="useful-links">
-                                <li><a href="faq.html"><i class="fas fa-angle-right"></i> FAQ</a></li>
+                                <li><a href="{{ route('faqs') }}"><i class="fas fa-angle-right"></i> FAQ</a></li>
                                 <li><a href="terms.html"><i class="fas fa-angle-right"></i> Terms of Use</a></li>
                                 <li><a href="privacy.html"><i class="fas fa-angle-right"></i> Privacy Policy</a></li>
                                 <li><a href="refund.html"><i class="fas fa-angle-right"></i> Refund Policy</a></li>
@@ -109,27 +115,37 @@
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div class="right">
-                                    34 Antiger Lane, USA, 12937
+                                    {{ $global_setting_data->footer_address }}
                                 </div>
                             </div>
                             <div class="list-item">
                                 <div class="left">
                                     <i class="fas fa-phone"></i>
                                 </div>
-                                <div class="right">contact@example.com</div>
+                                <div class="right">{{ $global_setting_data->footer_email }}</div>
                             </div>
                             <div class="list-item">
                                 <div class="left">
                                     <i class="fas fa-envelope"></i>
                                 </div>
-                                <div class="right">122-222-1212</div>
+                                <div class="right">{{ $global_setting_data->footer_phone }}</div>
                             </div>
                             <ul class="social">
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-youtube"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                                @if($global_setting_data->facebook!='')
+                                <li><a href="{{ $global_setting_data->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
+                                @endif
+                                @if($global_setting_data->twitter!='')
+                                <li><a href="{{ $global_setting_data->twitter }}"><i class="fab fa-twitter"></i></a></li>
+                                @endif
+                                @if($global_setting_data->youtube!='')
+                                <li><a href="{{ $global_setting_data->youtube }}"><i class="fab fa-youtube"></i></a></li>
+                                @endif
+                                @if($global_setting_data->linkedin!='')
+                                <li><a href="{{ $global_setting_data->linkedin }}"><i class="fab fa-linkedin-in"></i></a></li>
+                                @endif
+                                @if($global_setting_data->instagram!='')
+                                <li><a href="{{ $global_setting_data->instagram }}"><i class="fab fa-instagram"></i></a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -160,7 +176,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="copyright">
-                            Copyright &copy; 2023, CharityBig. All Rights Reserved.
+                            {{ $global_setting_data->copyright }}
                         </div>
                     </div>
                 </div>

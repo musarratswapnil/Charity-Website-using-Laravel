@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\FaqController;
-
 use App\Http\Controllers\Customer\CustomerHomeController;
 use App\Http\Controllers\Customer\CustomerAuthController;
 use App\Http\Controllers\Customer\CustomerProfileController;
@@ -20,6 +19,7 @@ use App\Http\Controllers\Admin\AdminMissionController;
 use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Front\AboutController;
 use App\Http\Controllers\Admin\AdminFaqController;
+use App\Http\Controllers\Admin\AdminSettingController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -65,6 +65,10 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::get('admin/faq/edit/{id}', [AdminFaqController::class, 'edit'])->name('admin_faq_edit');
     Route::post('admin/faq/edit-submit/{id}', [AdminFaqController::class, 'edit_submit'])->name('admin_faq_edit_submit');
     Route::get('admin/faq/delete/{id}', [AdminFaqController::class, 'delete'])->name('admin_faq_delete');
+
+
+    Route::get('admin/settings/index', [AdminSettingController::class, 'index'])->name('admin_settings_index');
+    Route::post('admin/settings/update', [AdminSettingController::class, 'update'])->name('admin_settings_update');
 
 
     Route::get('admin/slider/index', [AdminSliderController::class, 'index'])->name('admin_slider_index');
