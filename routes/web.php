@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Front\AboutController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Front\ContactController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -28,6 +29,8 @@ use App\Http\Controllers\Admin\AdminSettingController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact/send-message', [ContactController::class, 'send_message'])->name('contact_send_message');
 
 
 
