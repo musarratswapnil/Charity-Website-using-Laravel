@@ -99,10 +99,10 @@
                             <h2 class="heading">Useful Links</h2>
                             <ul class="useful-links">
                                 <li><a href="{{ route('faqs') }}"><i class="fas fa-angle-right"></i> FAQ</a></li>
-                                <li><a href="terms.html"><i class="fas fa-angle-right"></i> Terms of Use</a></li>
-                                <li><a href="privacy.html"><i class="fas fa-angle-right"></i> Privacy Policy</a></li>
-                                <li><a href="refund.html"><i class="fas fa-angle-right"></i> Refund Policy</a></li>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i> Contact</a></li>
+                                <li><a href="{{ route('terms') }}"><i class="fas fa-angle-right"></i> Terms of Use</a></li>
+                                <li><a href="{{ route('privacy') }}"><i class="fas fa-angle-right"></i> Privacy Policy</a></li>
+                                {{-- <li><a href="refund.html"><i class="fas fa-angle-right"></i> Refund Policy</a></li> --}}
+                                <li><a href="{{ route('contact') }}"><i class="fas fa-angle-right"></i> Contact</a></li>
                             </ul>
                         </div>
                     </div>

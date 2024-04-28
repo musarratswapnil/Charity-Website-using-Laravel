@@ -2,25 +2,33 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\AdminHomeController;
-use App\Http\Controllers\Admin\AdminLoginController;
-use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\FaqController;
+use App\Http\Controllers\Front\EventController;
+use App\Http\Controllers\Front\AboutController;
+use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Front\CampaignController;
+use App\Http\Controllers\Front\TermsController;
+use App\Http\Controllers\Front\PrivacyController;
+
 use App\Http\Controllers\Customer\CustomerHomeController;
 use App\Http\Controllers\Customer\CustomerAuthController;
 use App\Http\Controllers\Customer\CustomerProfileController;
-use App\Http\Controllers\Admin\AdminSliderController;
-use App\Http\Controllers\Admin\AdminEventController;
-use App\Http\Controllers\Front\EventController;
-use App\Http\Controllers\Admin\AdminCampaignController;
-use App\Http\Controllers\Front\CampaignController;
+
+use App\Http\Controllers\Admin\AdminHomeController;
+use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminMissionController;
 use App\Http\Controllers\Admin\AdminFeatureController;
-use App\Http\Controllers\Front\AboutController;
+use App\Http\Controllers\Admin\AdminSliderController;
+use App\Http\Controllers\Admin\AdminEventController;
+use App\Http\Controllers\Admin\AdminCampaignController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminSettingController;
-use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Admin\AdminOtherPageController;
+
+
+
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -29,6 +37,10 @@ use App\Http\Controllers\Front\ContactController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
+
+Route::get('/terms-and-conditions', [TermsController::class, 'index'])->name('terms');
+Route::get('/privacy-policy', [PrivacyController::class, 'index'])->name('privacy');
+
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact/send-message', [ContactController::class, 'send_message'])->name('contact_send_message');
 
@@ -59,7 +71,7 @@ Route::post('/admin/reset-password-submit', [AdminLoginController::class, 'reset
 
 Route::group(['middleware' => 'admin:admin'], function () {
     Route::get('admin/home', [AdminHomeController::class, 'index'])->name('admin_home');
-    Route::get('admin/edit-profile', [AdminProfileController::class, 'index'])->name('admin_profile');
+    Route::get('admin/edit-profile', [AdminProfileController::class, 'index'])->name('admin_profile'); 
     Route::post('admin/edit-profile-submit', [AdminProfileController::class, 'profile_submit'])->name('admin_profile_submit');
 
     Route::get('admin/faq/index', [AdminFaqController::class, 'index'])->name('admin_faq_index');
@@ -72,6 +84,12 @@ Route::group(['middleware' => 'admin:admin'], function () {
 
     Route::get('admin/settings/index', [AdminSettingController::class, 'index'])->name('admin_settings_index');
     Route::post('admin/settings/update', [AdminSettingController::class, 'update'])->name('admin_settings_update');
+
+    Route::get('admin/other-pages/terms', [AdminOtherPageController::class, 'terms'])->name('admin_terms_page');
+    Route::post('admin/other-pages/terms-update', [AdminOtherPageController::class, 'terms_update'])->name('admin_terms_page_update');
+
+    Route::get('admin/other-pages/privacy', [AdminOtherPageController::class, 'privacy'])->name('admin_privacy_page');
+    Route::post('admin/other-pages/privacy-update', [AdminOtherPageController::class, 'privacy_update'])->name('admin_privacy_page_update');
 
 
     Route::get('admin/slider/index', [AdminSliderController::class, 'index'])->name('admin_slider_index');

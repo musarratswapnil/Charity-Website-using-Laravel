@@ -25,6 +25,7 @@
             @php $column=12; @endphp
             @else
             @php $column=6; @endphp
+            @endif 
             <div class="col-lg-{{ $column }} col-md-12">
                 <div class="contact-form pb_70">
                     <form method="post"  action="{{ route('contact_send_message') }}">
