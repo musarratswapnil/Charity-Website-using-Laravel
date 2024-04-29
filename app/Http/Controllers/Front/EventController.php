@@ -11,7 +11,7 @@ use App\Models\Admin;
 use App\Mail\Websitemail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\EventTicket;
-use App\Models\User;
+use App\Models\Customer;
 use Auth;
 
 class EventController extends Controller
@@ -66,7 +66,7 @@ class EventController extends Controller
 
     public function payment(Request $request)
     {
-        if (!auth()->guard('customer')->check()) {
+        if (!Auth::guard('customer')->check()) {
             return redirect()->route('customer_login');
         }
 
@@ -77,6 +77,13 @@ class EventController extends Controller
         ]);
 
         $event_data = Event::where('id', $request->event_id)->first();
+
+        if($event_data->total_seat > 0) {
+            $remaining_seat = $event_data->total_seat - $event_data->booked_seat;
+            if($event_data->booked_seat + $request->number_of_tickets > $event_data->total_seat) {
+                return redirect()->back()->with('error','Sorry, only '.$remaining_seat.' tickets/seats are available');
+            }
+        }
 
         $total_price = $request->number_of_tickets * $request->unit_price;
 
@@ -128,10 +135,11 @@ class EventController extends Controller
             $obj = new EventTicket;
 
             $obj->event_id = session()->get('event_id');
-            $obj->user_id = auth()->user()->id;
+            $obj->user_id = Auth::guard('customer')->user()->id;
             $obj->unit_price = session()->get('unit_price');
             $obj->number_of_tickets = session()->get('number_of_tickets');
             $obj->total_price = session()->get('total_price');
+            
             $obj->currency = $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'];
 
             $obj->payment_id = $response['id'];
@@ -140,7 +148,7 @@ class EventController extends Controller
             $obj->save();
 
             $event_data = Event::where('id', session()->get('event_id'))->first();
-            $event_data->booked_seat = $event_data->booked_seat - session()->get('number_of_tickets');
+            $event_data->booked_seat = $event_data->booked_seat + session()->get('number_of_tickets');
             $event_data->update();
 
             unset($_SESSION['event_id']);
@@ -153,7 +161,7 @@ class EventController extends Controller
             return redirect()->route('event_ticket_cancel');
         }
     }
-    public function cancel()
+    public function paypal_cancel()
     {
         return redirect()->route('home')->with('error', 'Payment cancelled.');
     }

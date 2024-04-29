@@ -52,7 +52,7 @@ Route::post('/event/send-message', [EventController::class, 'send_message'])->na
 
 
 Route::post('/event/ticket/payment', [EventController::class, 'payment'])->name('event_ticket_payment');
-Route::get('/event/ticket/paypal-success', [EventController::class, 'payal_success'])->name('event_ticket_paypal_success');
+Route::get('/event/ticket/paypal-success', [EventController::class, 'paypal_success'])->name('event_ticket_paypal_success');
 Route::get('/event/ticket/paypal-cancel', [EventController::class, 'paypal_cancel'])->name('event_ticket_cancel');
 
 Route::get('/campaigns', [CampaignController::class, 'index'])->name('campaigns');
