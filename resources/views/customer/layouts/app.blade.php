@@ -6,9 +6,9 @@
 
     <link rel="icon" type="image/png" href="{{ asset('uploads/favicon.png') }}">
 
-    <title>Admin Panel</title>
+    <title>User Panel</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     @include('customer.layouts.styles')
 
@@ -19,28 +19,16 @@
 <body>
 <div id="app">
     <div class="main-wrapper">
-
+        
         @include('customer.layouts.nav')
-
-
-
         @include('customer.layouts.sidebar')
 
-        <div class="main-content">
-            <section class="section">
-                <div class="section-header">
-                    <h1 class="text-primary">@yield('heading')</h1>
-                </div>
-                
-                @yield('main_content')
-            </section>
-        </div>
+        @yield('main_content')
 
     </div>
 </div>
 
 @include('customer.layouts.scripts_footer')
-
 
 </body>
 </html>

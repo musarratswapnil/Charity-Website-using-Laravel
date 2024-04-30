@@ -4,9 +4,9 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header d-flex justify-content-between">
-            <h1 class="text-primary">Event</h1>
+            <h1>Events</h1>
             <div>
-                <a href="{{ route('admin_event_create') }}" class="btn btn-primary">Add New</a>
+                <a href="{{ route('admin_event_create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</a>
             </div>
         </div>
         <div class="section-body">
@@ -22,7 +22,7 @@
                                             <th>Featured Photo</th>
                                             <th>Name</th>
                                             <th>Date & Time</th>
-                                            <th>Ticket Price</th>
+                                            <th>Price</th>
                                             <th>Total Seat</th>
                                             <th>Booked Seat</th>
                                             <th>Options</th>
@@ -33,28 +33,38 @@
                                         @foreach ($events as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><img src="{{ asset('uploads/'. $item->featured_photo) }}" alt="" class="w_100"></td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->date }} <br> {{ $item->time }}</td> <!-- Corrected Placement -->
-                                            <td>{{ $item->price }}</td>
-                                            
-                                            <td>{{ $item->total_seat }}</td>
-                                            <td>{{ $item->booked_seat }}</td>
                                             <td>
-                                                <a href="{{ route('admin_event_photo', $item->id) }}" class="btn btn-primary btn-sm mb_5">Photo Gallery</a><br>
-                                                <a href="{{ route('admin_event_video', $item->id) }}" class="btn btn-success btn-sm">Video Gallery</a>
+                                                <img src="{{ asset('uploads/'.$item->featured_photo) }}" alt="" class="w_150">
+                                            </td>
+                                            <td>
+                                                {{ $item->name }}
+                                            </td>
+                                            <td>
+                                                {{ $item->date }} <br>
+                                                {{ $item->time }}
+                                            </td>
+                                            <td>
+                                                {{ $item->price }}
+                                            </td>
+                                            <td>
+                                                {{ $item->total_seat }}
+                                            </td>
+                                            <td>
+                                                {{ $item->booked_seat }}
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin_event_photo',$item->id) }}" class="btn btn-primary btn-sm w_100_p mb_5">Photo Gallery</a>
+                                                <a href="{{ route('admin_event_video',$item->id) }}" class="btn btn-success btn-sm w_100_p mb_5">Video Gallery</a>
+                                                <a href="{{ route('admin_event_tickets',$item->id) }}" class="btn btn-warning btn-sm w_100_p">Tickets</a>
                                             </td>
                                             <td class="pt_10 pb_10">
-                                                <a href="{{ Route('admin_event_edit', $item->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                <a href="{{ Route('admin_event_delete', $item->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');"><i class="fas fa-trash"></i></a>
+                                                <a href="{{ route('admin_event_edit',$item->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                <a href="{{ route('admin_event_delete',$item->id) }}" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');"><i class="fas fa-trash"></i></a>
                                             </td>
-                                            
                                         </tr>
                                         @endforeach
                                     </tbody>
-                                    
-        
-                                 </table>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -63,5 +73,4 @@
         </div>
     </section>
 </div>
-
 @endsection

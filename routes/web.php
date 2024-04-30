@@ -124,6 +124,8 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::get('admin/event/video/{id}', [AdminEventController::class, 'video'])->name('admin_event_video');
     Route::post('admin/event/video-submit/{id}', [AdminEventController::class, 'video_submit'])->name('admin_event_video_submit');
     Route::get('admin/event/video-delete/{id}', [AdminEventController::class, 'video_delete'])->name('admin_event_video_delete');
+    Route::get('admin/event/tickets/{id}', [AdminEventController::class, 'tickets'])->name('admin_event_tickets');
+    Route::get('/event/ticket/invoice/{id}', [AdminEventController::class, 'ticket_invoice'])->name('admin_event_ticket_invoice');
 
 
 
@@ -164,6 +166,9 @@ Route::group(['middleware' => 'customer:customer'], function () {
     Route::get('/customer/home', [CustomerHomeController::class, 'index'])->name('customer_home');
 
     Route::get('/customer/edit-profile', [CustomerProfileController::class, 'index'])->name('customer_profile');
-
     Route::post('/customer/edit-profile-submit', [CustomerProfileController::class, 'profile_submit'])->name('customer_profile_submit');
+
+    Route::get('/customer/event/tickets', [CustomerHomeController::class, 'tickets'])->name('customer_event_tickets');
+    Route::get('/customer/event/ticket/invoice/{id}', [CustomerHomeController::class, 'ticket_invoice'])->name('customer_event_ticket_invoice');
+
 });

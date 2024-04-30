@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\EventPhoto;
 use App\Models\EventVideo;
+use App\Models\EventTicket;
+use App\Models\User;
 
 class AdminEventController extends Controller
 {
@@ -108,7 +110,7 @@ class AdminEventController extends Controller
         $obj->date = $request->date;
         $obj->time = $request->time;
         $obj->price = $request->price;
-        $obj->map = $request->map;
+        // $obj->map = $request->map;
         $obj->short_description = $request->short_description;
         $obj->description = $request->description;
         $obj->total_seat = $request->total_seat;
@@ -187,5 +189,19 @@ class AdminEventController extends Controller
         $event_video = EventVideo::findOrFail($id);
         $event_video->delete();
         return redirect()->back()->with('success', 'Event video deleted successfully');
+    }
+
+    public function tickets($id)
+    {
+        $event_single = Event::findOrFail($id);
+        $event_tickets = EventTicket::where('event_id', $id)->where('payment_status', 'COMPLETED')->get();
+        return view('admin.event.tickets', compact('event_single', 'event_tickets'));
+    }
+
+    public function ticket_invoice($id)
+    {
+        $ticket_data = EventTicket::findOrFail($id);
+        $user_data = User::findOrFail($ticket_data->user_id);
+        return view('admin.event.invoice', compact('ticket_data', 'user_data'));
     }
 }
