@@ -68,112 +68,71 @@
 @endif
 
 
+@if($home_item->campaign_status == 'Show')
 <div class="cause pt_70">
     <div class="container">
+        
+        @if( $home_item->campaign_heading != '' || $home_item->campaign_subheading != '' )
         <div class="row">
             <div class="col-md-12">
                 <div class="heading">
-                    <h2>Featured Causes</h2>
+                    <h2>{{ $home_item->campaign_heading }}</h2>
                     <p>
-                        Our organization focuses on providing services to the homeless peoples.
+                        {{ $home_item->campaign_subheading }}
                     </p>
                 </div>
             </div>
         </div>
+        @endif
+
         <div class="row">
+            @foreach($campaigns as $item)
             <div class="col-lg-4 col-md-6">
                 <div class="item pb_70">
                     <div class="photo">
-                        <img src="uploads/cause-1.jpg" alt="">
+                        <img src="{{ asset('uploads/'.$item->featured_photo) }}" alt="">
                     </div>
                     <div class="text">
                         <h2>
-                            <a href="cause.html">Child Support</a>
+                            <a href="{{ route('campaign', $item->slug) }}">{{ $item->name }}</a>
                         </h2>
                         <div class="short-des">
                             <p>
-                                To provide food, shelter, clothing, education and medical assistance to homeless children and their families.
+                                {!! nl2br($item->short_description) !!}
                             </p>
                         </div>
+                        @php
+                            $perc = ($item->raised / $item->goal) * 100;
+                            $perc = ceil($perc);
+                        @endphp
                         <div class="progress mb_10">
-                            <div class="progress-bar w-0" role="progressbar" aria-label="Example with label" aria-valuenow="70" aria-valuemin="0" aria-valuemax="70" style="animation: progressAnimation1 2s linear forwards;"></div>
+                            <div class="progress-bar w-0" role="progressbar" aria-label="Example with label" aria-valuenow="{{ $perc }}" aria-valuemin="0" aria-valuemax="100" style="animation: progressAnimation{{ $loop->iteration }} 2s linear forwards;"></div>
                             <style>
-                                @keyframes progressAnimation1 {from {width: 0;}to {width: 70%;}}
+                                @keyframes progressAnimation{{ $loop->iteration }} {
+                                    from {
+                                        width: 0;
+                                    }
+                                    to {
+                                        width: {{ $perc }}%;
+                                    }
+                                }
                             </style>
                         </div>
                         <div class="lbl mb_20">
-                            <div class="goal">Goal: $4000</div>
-                            <div class="raised">Raised: $3500</div>
+                            <div class="goal">Goal: ${{ $item->goal }}</div>
+                            <div class="raised">Raised: ${{ $item->raised }}</div>
                         </div>
                         <div class="button-style-2">
-                            <a href="cause.html">Donate Now <i class="fas fa-long-arrow-alt-right"></i></a>
+                            <a href="{{ route('campaign', $item->slug) }}">Donate Now <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="item pb_70">
-                    <div class="photo">
-                        <img src="uploads/cause-2.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="cause.html">Help to Mothers</a>
-                        </h2>
-                        <div class="short-des">
-                            <p>
-                                To help the mothers who are homeless & helpless, we provide them food, shelter & medical assistance.
-                            </p>
-                        </div>
-                        <div class="progress mb_10">
-                            <div class="progress-bar w-0" role="progressbar" aria-label="Example with label" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="animation: progressAnimation2 2s linear forwards;"></div>
-                            <style>
-                                @keyframes progressAnimation2 {from {width: 0;}to {width: 90%;}}
-                            </style>
-                        </div>
-                        <div class="lbl mb_20">
-                            <div class="goal">Goal: $5000</div>
-                            <div class="raised">Raised: $4500</div>
-                        </div>
-                        <div class="button-style-2">
-                            <a href="cause.html">Donate Now <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="item pb_70">
-                    <div class="photo">
-                        <img src="uploads/cause-3.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="cause.html">Water for All</a>
-                        </h2>
-                        <div class="short-des">
-                            <p>
-                                To provide clean water to the homeless peoples, we have taken a project to provide them clean water.
-                            </p>
-                        </div>
-                        <div class="progress mb_10">
-                            <div class="progress-bar w-0" role="progressbar" aria-label="Example with label" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="animation: progressAnimation3 2s linear forwards;"></div>
-                            <style>
-                                @keyframes progressAnimation3 {from {width: 0;}to {width: 30%;}}
-                            </style>
-                        </div>
-                        <div class="lbl mb_20">
-                            <div class="goal">Goal: $3000</div>
-                            <div class="raised">Raised: $1000</div>
-                        </div>
-                        <div class="button-style-2">
-                            <a href="cause.html">Donate Now <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
+@endif
 
 
 
@@ -203,91 +162,67 @@
 
 
 
+@if($home_item->event_status == 'Show')
 <div class="event pt_70">
     <div class="container">
+
+        @if( $home_item->event_heading != '' || $home_item->event_subheading != '' )
         <div class="row">
             <div class="col-md-12">
                 <div class="heading">
-                    <h2>Upcoming Events</h2>
+                    <h2>{{ $home_item->event_heading }}</h2>
                     <p>
-                        You can organize events and help us to raise fund for the poor people.
+                        {{ $home_item->event_subheading }}
                     </p>
                 </div>
             </div>
         </div>
+        @endif
+
         <div class="row">
+            @foreach($events as $item)
+            @php
+            $current_timestamp = strtotime(date('Y-m-d H:i'));
+            $event_timestamp = strtotime($item->date.' '.$item->time);
+            @endphp
+
+            @if($event_timestamp < $current_timestamp)
+            @continue
+            @endif
+
             <div class="col-lg-4 col-md-6">
                 <div class="item pb_70">
                     <div class="photo">
-                        <img src="uploads/event-1.jpg" alt="">
+                        <img src="{{ asset('uploads/'.$item->featured_photo) }}" alt="">
                     </div>
                     <div class="text">
                         <h2>
-                            <a href="event.html">Abled child cancer</a>
+                            <a href="{{ route('event', $item->slug) }}">{{ $item->name }}</a>
                         </h2>
                         <div class="date-time">
-                            <i class="fas fa-calendar-alt"></i> 23 Sep 2023, 09:30 AM
+                            <i class="fas fa-calendar-alt"></i> 
+                            @php
+                            $date = \Carbon\Carbon::parse($item->date)->format('j M, Y');
+                            $time = \Carbon\Carbon::parse($item->time)->format('h:i A');
+                            @endphp
+                            {{ $date }}, {{ $time }}
                         </div>
                         <div class="short-des">
                             <p>
-                                To provide food, shelter, clothing, education and medical assistance to homeless children and their families.
+                                {!! nl2br($item->short_description) !!}
                             </p>
                         </div>
                         <div class="button-style-2">
-                            <a href="event.html">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
+                            <a href="{{ route('event', $item->slug) }}">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="item pb_70">
-                    <div class="photo">
-                        <img src="uploads/event-2.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="event.html">Contribute for Recovery</a>
-                        </h2>
-                        <div class="date-time">
-                            <i class="fas fa-calendar-alt"></i> 23 Sep 2023, 09:30 AM
-                        </div>
-                        <div class="short-des">
-                            <p>
-                                To help the mothers who are homeless & helpless, we provide them food, shelter & medical assistance.
-                            </p>
-                        </div>
-                        <div class="button-style-2">
-                            <a href="event.html">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="item pb_70">
-                    <div class="photo">
-                        <img src="uploads/event-3.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="event.html">Playing For World</a>
-                        </h2>
-                        <div class="date-time">
-                            <i class="fas fa-calendar-alt"></i> 23 Sep 2023, 09:30 AM
-                        </div>
-                        <div class="short-des">
-                            <p>
-                                To provide clean water to the homeless peoples, we have taken a project to provide them clean water.
-                            </p>
-                        </div>
-                        <div class="button-style-2">
-                            <a href="event.html">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
+@endif
 
 
 

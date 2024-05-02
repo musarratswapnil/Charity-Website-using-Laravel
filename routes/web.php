@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\AdminCampaignController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminOtherPageController;
+use App\Http\Controllers\Admin\AdminHomeItemController;
 
 
 
@@ -112,6 +113,9 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::post('admin/feature/edit-submit/{id}', [AdminFeatureController::class, 'edit_submit'])->name('admin_feature_edit_submit');
     Route::get('admin/feature/delete/{id}', [AdminFeatureController::class, 'delete'])->name('admin_feature_delete');
     Route::post('admin/feature/section-update', [AdminFeatureController::class, 'section_update'])->name('admin_feature_section_update');
+
+    Route::get('/home-item/index', [AdminHomeItemController::class, 'index'])->name('admin_home_item_index');
+    Route::post('/home-item/update', [AdminHomeItemController::class, 'update'])->name('admin_home_item_update');
 
 
     Route::get('admin/mission/edit', [AdminMissionController::class, 'edit'])->name('admin_mission_edit');

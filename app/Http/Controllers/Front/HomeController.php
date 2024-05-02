@@ -8,6 +8,9 @@ use App\Models\Slider;
 use App\Models\Mission;
 use App\Models\Feature;
 use App\Models\FeatureSectionItem;
+use App\Models\Event;
+use App\Models\HomeItem;
+use App\Models\Campaign;
 
 class HomeController extends Controller
 {
@@ -17,6 +20,10 @@ class HomeController extends Controller
         $mission=Mission::where('id', 1)->first();
         $features = Feature::get();
         $feature_section_items=FeatureSectionItem::where('id', 1)->first();
-        return view('front.home', compact('slider', 'mission', 'features', 'feature_section_items'));
+        // $featured_campaigns = Campaign::where('is_featured','Yes')->get();
+        $events = Event::take(3)->get();
+        $home_item = HomeItem::where('id', 1)->first();
+        $campaigns=Campaign::orderBy('id','desc')->take(3)->get();
+        return view('front.home', compact('slider', 'mission', 'features', 'feature_section_items', 'events', 'campaigns','home_item'));
     }
 }
