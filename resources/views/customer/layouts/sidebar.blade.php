@@ -13,6 +13,8 @@
 
             <li class="{{ Request::is ('customer/event/tickets') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('customer_event_tickets') }}"><i class="fas fa-hand-point-right"></i> <span>Event Tickets</span></a></li>
 
+            <li class="{{ Request::is ('customer/campaign/donations') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('customer_campaign_donations') }}"><i class="fas fa-hand-point-right"></i> <span>Campaign Donations</span></a></li>
+
             {{-- <li class="nav-item dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right text-primary"></i><span class="text-primary">Dropdown Items</span></a>
                 <ul class="dropdown-menu text-primary">

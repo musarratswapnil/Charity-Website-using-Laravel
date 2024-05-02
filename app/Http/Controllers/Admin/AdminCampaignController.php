@@ -8,6 +8,7 @@ use App\Models\Campaign;
 use App\Models\CampaignPhoto;
 use App\Models\CampaignVideo;
 use App\Models\User;
+use App\Models\CampaignDonation;
 
 class AdminCampaignController extends Controller
 {
@@ -160,5 +161,19 @@ class AdminCampaignController extends Controller
         $campaign_video = CampaignVideo::findOrFail($id);
         $campaign_video->delete();
         return redirect()->back()->with('success', 'Campaign video deleted successfully');
+    }
+
+    public function donations($id)
+    {
+        $campaign_single = Campaign::findOrFail($id);
+        $donations = CampaignDonation::where('campaign_id', $id)->where('payment_status', 'COMPLETED')->get();
+        return view('admin.campaign.donations', compact('campaign_single', 'donations'));
+    }
+
+    public function donation_invoice($id)
+    {
+        $donation_data = CampaignDonation::findOrFail($id);
+        $user_data = User::findOrFail($donation_data->user_id);
+        return view('admin.campaign.invoice', compact('donation_data', 'user_data'));
     }
 }

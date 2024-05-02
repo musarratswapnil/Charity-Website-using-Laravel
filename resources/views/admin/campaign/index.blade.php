@@ -38,7 +38,8 @@
                                             <td>{{ $item->raised }}</td>
                                             <td>
                                                 <a href="{{ route('admin_campaign_photo', $item->id) }}" class="btn btn-primary btn-sm mb_5">Photo Gallery</a><br>
-                                                <a href="{{ route('admin_campaign_video', $item->id) }}" class="btn btn-success btn-sm">Video Gallery</a>
+                                                <a href="{{ route('admin_campaign_video', $item->id) }}" class="btn btn-success btn-sm mb_5">Video Gallery</a><br>
+                                                <a href="{{ route('admin_campaign_donations', $item->id) }}" class="btn btn-danger btn-sm">Donation</a>
                                             </td>
                                             <td class="pt_10 pb_10">
                                                 <a href="{{ Route('admin_campaign_edit', $item->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>

@@ -148,6 +148,9 @@ Route::group(['middleware' => 'admin:admin'], function () {
     Route::post('admin/campaign/video-submit/{id}', [AdminCampaignController::class, 'video_submit'])->name('admin_campaign_video_submit');
     Route::get('admin/campaign/video-delete/{id}', [AdminCampaignController::class, 'video_delete'])->name('admin_campaign_video_delete');
 
+    Route::get('/campaign/donations/{id}', [AdminCampaignController::class, 'donations'])->name('admin_campaign_donations');
+    Route::get('/campaign/donation/invoice/{id}', [AdminCampaignController::class, 'donation_invoice'])->name('admin_campaign_donation_invoice');
+
     
 
 });
@@ -176,5 +179,8 @@ Route::group(['middleware' => 'customer:customer'], function () {
 
     Route::get('/customer/event/tickets', [CustomerHomeController::class, 'tickets'])->name('customer_event_tickets');
     Route::get('/customer/event/ticket/invoice/{id}', [CustomerHomeController::class, 'ticket_invoice'])->name('customer_event_ticket_invoice');
+
+    Route::get('/customer/campaign/donations', [CustomerHomeController::class, 'donations'])->name('customer_campaign_donations');
+    Route::get('/customer/campaign/donation/invoice/{id}', [CustomerHomeController::class, 'donation_invoice'])->name('customer_campaign_donation_invoice');
 
 });
