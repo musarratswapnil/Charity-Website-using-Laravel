@@ -59,6 +59,12 @@ Route::get('/campaigns', [CampaignController::class, 'index'])->name('campaigns'
 Route::get('/campaign/{slug}', [CampaignController::class, 'detail'])->name('campaign');
 Route::post('/campaign/send-message', [CampaignController::class, 'send_message'])->name('campaign_send_message');
 
+Route::post('/donation/payment', [CampaignController::class, 'payment'])->name('donation_payment');
+Route::get('/donation/cancel', [CampaignController::class, 'cancel'])->name('donation_cancel');
+
+Route::get('/donation/paypal-success', [CampaignController::class, 'paypal_success'])->name('donation_paypal_success');
+// Route::get('/donation/stripe-success', [CampaignController::class, 'stripe_success'])->name('donation_stripe_success');  
+
 
 Route::get('/admin/login', [AdminLoginController::class, 'index'])->name('admin_login');
 Route::post('/admin/login-submit', [AdminLoginController::class, 'login_submit'])->name('admin_login_submit');
