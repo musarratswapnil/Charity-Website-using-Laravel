@@ -24,6 +24,8 @@
 
                     <li class="{{ Request::is ('admin/feature/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_feature_index') }}"><i class="fas fa-hand-point-right"></i> <span>Features</span></a></li>
 
+                    <li class="{{ Request::is ('admin/goal/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_goal_edit') }}"><i class="fas fa-hand-point-right"></i> <span>Goals</span></a></li>
+
                     <li class="{{ Request::is ('admin/home-item/*') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_home_item_index') }}"><i class="fas fa-hand-point-right"></i> <span>Home Items</span></a></li>
 
                 </ul>

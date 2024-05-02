@@ -11,6 +11,7 @@ use App\Models\FeatureSectionItem;
 use App\Models\Event;
 use App\Models\HomeItem;
 use App\Models\Campaign;
+use App\Models\Goal;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,7 @@ class HomeController extends Controller
         $events = Event::take(3)->get();
         $home_item = HomeItem::where('id', 1)->first();
         $campaigns=Campaign::orderBy('id','desc')->take(3)->get();
-        return view('front.home', compact('slider', 'mission', 'features', 'feature_section_items', 'events', 'campaigns','home_item'));
+        $goal=Goal::first();
+        return view('front.home', compact('slider', 'mission', 'features', 'feature_section_items', 'events', 'campaigns','home_item', 'goal'));
     }
 }
