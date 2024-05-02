@@ -184,3 +184,4 @@ Route::group(['middleware' => 'customer:customer'], function () {
     Route::get('/customer/campaign/donation/invoice/{id}', [CustomerHomeController::class, 'donation_invoice'])->name('customer_campaign_donation_invoice');
 
 });
+

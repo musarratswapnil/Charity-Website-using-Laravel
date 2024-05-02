@@ -38,7 +38,9 @@ class AdminProfileController extends Controller
                 'photo' => 'image|mimes:jpeg,jpg,png,gif'
             ]);
 
-            unlink(public_path('uploads/' . $admin_data->photo));
+            if ($admin_data->photo != NULL) {
+                unlink(public_path('uploads/' . $admin_data->photo));
+            }
 
             $ext = $request->file('photo')->extension();
             $final_name='admin'.'.'.$ext;

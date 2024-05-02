@@ -2,6 +2,7 @@
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand text-primary">
             <a href="{{ route('admin_home') }}" class="text-primary">Admin Panel</a>
+            
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin_home') }}"></a>
@@ -36,6 +37,7 @@
 
 
             <li class="{{ Request::is ('admin/other-pages/terms') ? 'active' : ''}}"><a class="nav-link text-primary" href="{{ route('admin_terms_page') }}"><i class="fas fa-hand-point-right"></i> <span>Terms Page</span></a></li>
+            
 
         </ul>
     </aside>

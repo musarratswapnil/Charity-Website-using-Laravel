@@ -18,7 +18,11 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-3">
+                                        @if (Auth::guard('customer')->user()->photo == '')
+                                        <img src="{{ asset('uploads/default.png') }}" alt="" class="profile-photo w_100_p">
+                                        @else
                                         <img src="{{ asset('uploads/'.Auth::guard('admin')->user()->photo) }}" alt="" class="profile-photo w_100_p">
+                                        @endif
                                         <input type="file" class="form-control mt_10" name="photo">
                                     </div>
                                     <div class="col-md-9">
